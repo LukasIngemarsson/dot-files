@@ -22,9 +22,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Jump to previous file
 vim.keymap.set('n', '<C-b>', '<C-^>', { desc = 'Jump back to previous file' })
 
--- C/C++ indentation
+-- C/C++ and Java indentation
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'cpp', 'h', 'hpp' },
+  pattern = { 'c', 'cpp', 'h', 'hpp', 'java' },
   callback = function()
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
@@ -38,5 +38,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.hl.on_yank()
+  end,
+})
+
+-- This group ensures the autocmd is only created once
+local augroup = vim.api.nvim_create_augroup('MyFormatOptions', { clear = true })
+
+-- Disable that comments continue on new lines automatically
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup,
+  pattern = '*', -- Run for all filetypes
+  callback = function()
+    vim.bo.formatoptions = string.gsub(vim.bo.formatoptions, '[ro]', '')
   end,
 })

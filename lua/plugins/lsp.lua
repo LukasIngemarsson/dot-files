@@ -102,6 +102,8 @@ return {
       local servers = {
         clangd = {},
         pyright = {},
+        jdtls = {},
+        kotlin_lsp = {},
         lua_ls = {
           settings = {
             Lua = {
