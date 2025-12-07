@@ -1,3 +1,8 @@
+-- Shift and tab
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.expandtab = true
+
 -- Line numbers
 vim.o.relativenumber = true
 vim.o.number = true
