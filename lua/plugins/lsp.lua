@@ -104,6 +104,7 @@ return {
         pyright = {},
         jdtls = {},
         kotlin_lsp = {},
+        tsserver = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -115,13 +116,20 @@ return {
         },
       }
 
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, { 'stylua' })
+      local mason_server_map = {
+        tsserver = 'typescript-language-server',
+      }
+
+      local ensure_installed = { 'stylua' }
+      for server, _ in pairs(servers or {}) do
+        table.insert(ensure_installed, mason_server_map[server] or server)
+      end
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
         ensure_installed = {},
-        automatic_installation = false,
+        automatic_installation = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
