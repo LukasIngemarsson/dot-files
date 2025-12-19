@@ -1,32 +1,38 @@
 return {
   {
-    'CopilotC-Nvim/CopilotChat.nvim',
+    "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
-      { 'nvim-lua/plenary.nvim', branch = 'master' },
+      { "nvim-lua/plenary.nvim", branch = "master" },
     },
-    build = 'make tiktoken',
+    build = "make tiktoken",
     keys = {
       {
-        '<leader>cc',
+        "<leader>cc",
         function()
-          require('CopilotChat').toggle()
+          require("CopilotChat").toggle()
         end,
-        desc = 'Toggle CopilotChat',
-        mode = 'n',
+        desc = "Toggle CopilotChat",
+        mode = "n",
       },
     },
     config = function()
-      require('render-markdown').setup {
-        file_types = { 'markdown', 'copilot-chat' },
-      }
-      require('CopilotChat').setup {
+      require("render-markdown").setup({
+        file_types = { "markdown", "copilot-chat" },
+      })
+      require("CopilotChat").setup({
         highlight_headers = false,
-        separator = '---',
-        error_header = '> [!ERROR] Error',
+        separator = "---",
+        error_header = "> [!ERROR] Error",
         window = {
           width = 70,
         },
-      }
+        mappings = {
+          reset = {
+            normal = "",
+            insert = "",
+          },
+        },
+      })
     end,
   },
 }
