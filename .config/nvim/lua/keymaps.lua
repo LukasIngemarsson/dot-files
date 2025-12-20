@@ -14,7 +14,7 @@ vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Jump to previous file
-vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Jump back to previous file" })
+vim.keymap.set("n", "<C-b>", "<C-^>", { desc = "Jump back to previous file" })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
